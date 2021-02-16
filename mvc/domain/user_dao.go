@@ -1,6 +1,8 @@
 package domain
 
 import (
+	"fmt"
+
 	"github.com/jebo87/golang-microservices/mvc/utils"
 )
 
@@ -30,7 +32,7 @@ func GetUser(userId int64) (*User, *utils.ApplicationError) {
 	}
 	
 	return nil, &utils.ApplicationError{
-		Message: "User not found",
+		Message: fmt.Sprintf("User %v not found", userId),
 		Status:  404,
 		Code:    "not_found",
 	}

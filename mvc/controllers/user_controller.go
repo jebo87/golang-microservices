@@ -9,7 +9,7 @@ import (
 	"github.com/jebo87/golang-microservices/mvc/utils"
 )
 
-func HandleUser( res http.ResponseWriter, req *http.Request,){
+func GetUser( res http.ResponseWriter, req *http.Request,){
   userID, err := strconv.ParseInt(req.URL.Query().Get("user_id"),10, 64)
 
   if err != nil {
