@@ -2,12 +2,13 @@ package domain
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/jebo87/golang-microservices/mvc/utils"
 )
 
-var(
-	users = []*User {
+var (
+	users = []*User{
 		{
 			ID:        1,
 			FirstName: "Lionel",
@@ -21,18 +22,30 @@ var(
 			Email:     "cr@gmail.com",
 		},
 	}
+
+	UserDao userDaoInterface
 )
 
-func GetUser(userId int64) (*User, *utils.ApplicationError) {
-	
-	for _,user := range users {
-		if user.ID == userId {
+func init() {
+	UserDao = &userDao{}
+}
+
+type userDao struct{}
+
+type userDaoInterface interface {
+	GetUser(userID int64) (*User, *utils.ApplicationError)
+}
+
+func (u *userDao) GetUser(userID int64) (*User, *utils.ApplicationError) {
+	log.Println("using database")
+	for _, user := range users {
+		if user.ID == userID {
 			return user, nil
 		}
 	}
-	
+
 	return nil, &utils.ApplicationError{
-		Message: fmt.Sprintf("User %v not found", userId),
+		Message: fmt.Sprintf("User %v not found", userID),
 		Status:  404,
 		Code:    "not_found",
 	}
