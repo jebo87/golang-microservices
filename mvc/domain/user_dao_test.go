@@ -7,11 +7,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetUserNoUserFound(t *testing.T){	
+func TestGetUserNoUserFound(t *testing.T) {
 	// Initialization
 
 	// Execution
-	user, err := GetUser(0)
+	user, err := UserDao.GetUser(0)
 
 	// Validation
 	assert.Nil(t, user, "We were not expecting to find a user with id 0")
@@ -22,16 +22,13 @@ func TestGetUserNoUserFound(t *testing.T){
 }
 
 func TestGetUserFound(t *testing.T) {
-	user, err := GetUser(1)
+	user, err := UserDao.GetUser(1)
 	//Validate that the user is not nil, if it is nil, then display the error message
-	assert.NotNil(t,user,"User should not be nil if the id was valid" )
-	assert.Nil(t,err,"We should not receive and error if the id was valid")
+	assert.NotNil(t, user, "User should not be nil if the id was valid")
+	assert.Nil(t, err, "We should not receive and error if the id was valid")
 	assert.EqualValues(t, 1, user.ID)
-	assert.EqualValues(t,"Lionel", user.FirstName)
-	assert.EqualValues(t,"Messi", user.LastName)
-	assert.EqualValues(t,"lio@gmail.com", user.Email)
-
+	assert.EqualValues(t, "Lionel", user.FirstName)
+	assert.EqualValues(t, "Messi", user.LastName)
+	assert.EqualValues(t, "lio@gmail.com", user.Email)
 
 }
-
-

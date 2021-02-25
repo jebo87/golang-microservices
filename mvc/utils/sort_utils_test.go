@@ -75,3 +75,5 @@ func BenchmarkSort100000(b *testing.B) {
 		Sort(els)
 	}
 }
+
+//go test -bench=.
