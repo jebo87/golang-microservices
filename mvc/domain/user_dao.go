@@ -2,7 +2,6 @@ package domain
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/jebo87/golang-microservices/mvc/utils"
 )
@@ -37,7 +36,6 @@ type userDaoInterface interface {
 }
 
 func (u *userDao) GetUser(userID int64) (*User, *utils.ApplicationError) {
-	log.Println("using database")
 	for _, user := range users {
 		if user.ID == userID {
 			return user, nil
