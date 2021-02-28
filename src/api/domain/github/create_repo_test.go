@@ -36,7 +36,7 @@ func TestCreateRepoRequest(t *testing.T) {
 
 func TestCreateRepoResponse(t *testing.T) {
 	response := CreateRepoResponse{
-		ID:       "123",
+		ID:       123,
 		Name:     "Test response",
 		FullName: "This is the full name",
 		Owner: RepoOwner{

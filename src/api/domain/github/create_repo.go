@@ -11,7 +11,7 @@ type CreateRepoRequest struct {
 }
 
 type CreateRepoResponse struct {
-	ID          string          `json:"id"`
+	ID          int64           `json:"id"`
 	Name        string          `json:"name"`
 	FullName    string          `json:"full_name"`
 	Owner       RepoOwner       `json:"owner"`
