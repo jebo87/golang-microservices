@@ -1,0 +1,5 @@
+info.txt
+src/api/config/
+init.sh
+coverage.out
+go.sum 
