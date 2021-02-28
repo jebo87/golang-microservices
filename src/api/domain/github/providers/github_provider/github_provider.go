@@ -7,8 +7,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/jebo87/golang-microservices/src/api/clients/restclient"
 	"github.com/jebo87/golang-microservices/src/api/domain/github"
-	"github.com/jebo87/golang-microservices/src/api/domain/github/clients/restclient"
 )
 
 const (

@@ -6,6 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Polo(c *gin.Context) {
+const (
+	polo = "polo"
+)
+
+func Marco(c *gin.Context) {
 	c.String(http.StatusOK, "polo")
 }
