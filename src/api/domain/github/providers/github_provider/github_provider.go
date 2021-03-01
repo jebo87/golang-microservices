@@ -27,7 +27,7 @@ func CreateRepo(accessToken string, request github.CreateRepoRequest) (*github.C
 
 	response, err := restclient.Post(urlCreateRepo, request, headers)
 	if err != nil {
-		log.Printf("error trying to create new github repo: %s", err)
+		log.Println(fmt.Sprintf("error trying to create new github repo: %s", err))
 		return nil, &github.GithubErrorResponse{
 			StatusCode: http.StatusInternalServerError,
 			Message:    err.Error(),
@@ -65,6 +65,6 @@ func CreateRepo(accessToken string, request github.CreateRepoRequest) (*github.C
 			Message:    "Error when trying to unmarshal body succesful response",
 		}
 	}
-
+	log.Println("returning result no error")
 	return &result, nil
 }
