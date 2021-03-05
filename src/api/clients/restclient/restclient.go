@@ -11,13 +11,22 @@ import (
 var (
 	enabledMocks = false
 	mocks        = make(map[string]*Mock)
+	Client       HTTPClient
 )
 
 type Mock struct {
 	Url        string
 	HttpMethod string
-	Response   http.Response
+	Response   *http.Response
 	Err        error
+}
+
+func init() {
+	Client = &http.Client{}
+}
+
+type HTTPClient interface {
+	Do(req *http.Request) (*http.Response, error)
 }
 
 func getMockId(httpMethod string, url string) string {
@@ -32,7 +41,7 @@ func Post(url string, body interface{}, headers http.Header) (*http.Response, er
 		if mock == nil {
 			return nil, errors.New("no mockup given for request")
 		}
-		return &mock.Response, mock.Err
+		return mock.Response, mock.Err
 	}
 
 	jsonBytes, err := json.Marshal(body)
@@ -41,8 +50,8 @@ func Post(url string, body interface{}, headers http.Header) (*http.Response, er
 	}
 	request, err := http.NewRequest(http.MethodPost, url, bytes.NewReader(jsonBytes))
 	request.Header = headers
-	client := http.Client{}
-	return client.Do(request)
+
+	return Client.Do(request)
 
 }
 
@@ -61,4 +70,8 @@ func AddMockup(mock Mock) {
 func FlushMockups() {
 	mocks = make(map[string]*Mock)
 
+}
+
+func GetMocks() map[string]*Mock {
+	return mocks
 }
