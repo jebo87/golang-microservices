@@ -57,7 +57,6 @@ func CreateRepo(accessToken string, request github.CreateRepoRequest) (*github.C
 	}
 
 	var result github.CreateRepoResponse
-
 	if err := json.Unmarshal(bytes, &result); err != nil {
 		log.Println(fmt.Sprintf("Error when trying to unmarshal body succesful response %s", err))
 		return nil, &github.GithubErrorResponse{

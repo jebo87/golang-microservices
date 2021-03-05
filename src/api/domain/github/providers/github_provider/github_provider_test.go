@@ -52,7 +52,7 @@ func TestCreateRepoInvalidResponseBody(t *testing.T) {
 	restclient.AddMockup(restclient.Mock{
 		Url:        "https://api.github.com/user/repos",
 		HttpMethod: http.MethodPost,
-		Response: http.Response{
+		Response: &http.Response{
 			StatusCode: http.StatusCreated,
 			Body:       badBody,
 		},
@@ -71,7 +71,7 @@ func TestCreateRepoInvalidJSONResponse(t *testing.T) {
 	restclient.AddMockup(restclient.Mock{
 		Url:        "https://api.github.com/user/repos",
 		HttpMethod: http.MethodPost,
-		Response: http.Response{
+		Response: &http.Response{
 			StatusCode: http.StatusInternalServerError,
 			Body:       ioutil.NopCloser(strings.NewReader(`{"id":"123}`)),
 		},
@@ -90,7 +90,7 @@ func TestCreateRepoServerError(t *testing.T) {
 	restclient.AddMockup(restclient.Mock{
 		Url:        "https://api.github.com/user/repos",
 		HttpMethod: http.MethodPost,
-		Response: http.Response{
+		Response: &http.Response{
 			StatusCode: http.StatusInternalServerError,
 			Body:       ioutil.NopCloser(strings.NewReader(`{"message":"test"}`)),
 		},
@@ -109,7 +109,7 @@ func TestCreateRepoCreatedButJSONParseError(t *testing.T) {
 	restclient.AddMockup(restclient.Mock{
 		Url:        "https://api.github.com/user/repos",
 		HttpMethod: http.MethodPost,
-		Response: http.Response{
+		Response: &http.Response{
 			StatusCode: http.StatusCreated,
 			Body:       ioutil.NopCloser(strings.NewReader(`{"asdasd`)),
 		},
@@ -128,7 +128,7 @@ func TestCreateRepoCreatedSuccessful(t *testing.T) {
 	restclient.AddMockup(restclient.Mock{
 		Url:        "https://api.github.com/user/repos",
 		HttpMethod: http.MethodPost,
-		Response: http.Response{
+		Response: &http.Response{
 			StatusCode: http.StatusCreated,
 			Body: ioutil.NopCloser(strings.NewReader(`{
 				"id": 1296269,

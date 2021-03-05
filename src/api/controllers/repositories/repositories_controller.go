@@ -33,10 +33,7 @@ func CreateRepos(c *gin.Context) {
 		return
 	}
 
-	result, err := services.RepositoryService.CreateRepos(request)
-	if err != nil {
-		c.JSON(err.Status(), err)
-		return
-	}
+	result := services.RepositoryService.CreateRepos(request)
+
 	c.JSON(result.StatusCode, result)
 }

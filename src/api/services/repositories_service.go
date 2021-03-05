@@ -16,7 +16,7 @@ type reposService struct{}
 
 type repoServiceInterface interface {
 	CreateRepo(request repositories.CreateRepoRequest) (*repositories.CreateRepoResponse, errors.ApiError)
-	CreateRepos(request []repositories.CreateRepoRequest) (repositories.CreateReposResponse, errors.ApiError)
+	CreateRepos(request []repositories.CreateRepoRequest) repositories.CreateReposResponse
 }
 
 var (
@@ -53,7 +53,7 @@ func (s *reposService) CreateRepo(input repositories.CreateRepoRequest) (*reposi
 
 }
 
-func (s *reposService) CreateRepos(requests []repositories.CreateRepoRequest) (repositories.CreateReposResponse, errors.ApiError) {
+func (s *reposService) CreateRepos(requests []repositories.CreateRepoRequest) repositories.CreateReposResponse {
 	input := make(chan repositories.CreateRepositoriesResult)
 	output := make(chan repositories.CreateReposResponse)
 	defer close(output)
@@ -84,7 +84,7 @@ func (s *reposService) CreateRepos(requests []repositories.CreateRepoRequest) (r
 		result.StatusCode = http.StatusPartialContent
 	}
 
-	return result, nil
+	return result
 
 }
 
